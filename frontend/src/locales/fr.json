@@ -1,0 +1,105 @@
+{
+  "app": {
+    "name": "HuteFast",
+    "slogan": "Plateforme de réservation de transport intelligente"
+  },
+  "common": {
+    "welcome": "Bienvenue",
+    "signIn": "Connexion",
+    "signUp": "S'inscrire",
+    "logout": "Déconnexion",
+    "email": "Email",
+    "password": "Mot de passe",
+    "phone": "Téléphone",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "accountType": "Type de compte",
+    "submit": "Soumettre",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "warning": "Avertissement"
+  },
+  "auth": {
+    "loginTitle": "Connectez-vous à HuteFast",
+    "registerTitle": "Créer votre compte",
+    "forgotPassword": "Mot de passe oublié?",
+    "dontHaveAccount": "Vous n'avez pas de compte?",
+    "alreadyHaveAccount": "Vous avez déjà un compte?",
+    "passenger": "Passager",
+    "driver": "Conducteur",
+    "companyAdmin": "Administrateur de l'entreprise",
+    "loginSuccess": "Connexion réussie",
+    "registerSuccess": "Inscription réussie",
+    "invalidCredentials": "Email ou mot de passe invalide",
+    "passwordResetSent": "Lien de réinitialisation du mot de passe envoyé à votre email"
+  },
+  "booking": {
+    "searchTrips": "Rechercher des trajets",
+    "fromCity": "De",
+    "toCity": "À",
+    "Date": "Date",
+    "passengers": "Passagers",
+    "bookNow": "Réserver maintenant",
+    "viewBookings": "Voir mes réservations",
+    "bookingConfirmed": "Réservation confirmée",
+    "cancelBooking": "Annuler la réservation",
+    "totalPrice": "Prix total",
+    "bookingReference": "Référence de réservation",
+    "departureTime": "Heure de départ",
+    "arrivalTime": "Heure d'arrivée",
+    "seats": "Places"
+  },
+  "payment": {
+    "selectPaymentMethod": "Sélectionnez le mode de paiement",
+    "momo": "Mobile Money",
+    "card": "Carte",
+    "ihuteCard": "Carte iHute",
+    "amount": "Montant",
+    "payNow": "Payer maintenant",
+    "paymentSuccess": "Paiement réussi",
+    "paymentFailed": "Erreur de paiement",
+    "transactionId": "ID de transaction"
+  },
+  "driver": {
+    "registerAsDriver": "S'inscrire en tant que conducteur",
+    "driverProfile": "Profil du conducteur",
+    "licenseNumber": "Numéro de permis",
+    "licenseExpiry": "Expiration du permis",
+    "vehicleRegistration": "Immatriculation du véhicule",
+    "myTrips": "Mes trajets",
+    "goOnline": "Se connecter",
+    "goOffline": "Se déconnecter",
+    "myEarnings": "Mes revenus",
+    "rating": "Évaluation"
+  },
+  "profile": {
+    "myProfile": "Mon profil",
+    "editProfile": "Modifier le profil",
+    "changePassword": "Changer le mot de passe",
+    "currentPassword": "Mot de passe actuel",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "deleteAccount": "Supprimer le compte",
+    "accountSettings": "Paramètres du compte"
+  },
+  "errors": {
+    "required": "Ce champ est obligatoire",
+    "invalidEmail": "Email invalide",
+    "passwordTooShort": "Le mot de passe doit contenir au moins 8 caractères",
+    "passwordMismatch": "Les mots de passe ne correspondent pas",
+    "somethingWentWrong": "Une erreur s'est produite. Veuillez réessayer."
+  },
+  "messages": {
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cela?",
+    "loadingData": "Chargement des données...",
+    "noResults": "Aucun résultat trouvé"
+  }
+}
