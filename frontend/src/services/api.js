@@ -82,4 +82,41 @@ export const driverService = {
   getReviews: (params) => api.get('/drivers/reviews', { params }),
 };
 
+// Short Trip Services
+export const shortTripService = {
+  getAvailableRoutes: (params) => api.get('/short-trips/routes', { params }),
+  getRouteDetails: (routeId) => api.get(`/short-trips/routes/${routeId}`),
+  createBooking: (data) => api.post('/short-trips/bookings', data),
+  getUserBookings: (params) => api.get('/short-trips/bookings/my', { params }),
+  cancelBooking: (bookingId) => api.delete(`/short-trips/bookings/${bookingId}`),
+  getAllBookings: (params) => api.get('/short-trips/bookings', { params }),
+};
+
+// iHute Card Services
+export const ihuteCardService = {
+  createCard: (data) => api.post('/ihute-cards/create', data),
+  getCard: () => api.get('/ihute-cards/my'),
+  addBalance: (data) => api.post('/ihute-cards/add-balance', data),
+  pay: (data) => api.post('/ihute-cards/pay', data),
+  getTransactions: (params) => api.get('/ihute-cards/transactions', { params }),
+  deactivateCard: () => api.put('/ihute-cards/deactivate'),
+  getAllCards: (params) => api.get('/ihute-cards', { params }),
+};
+
+// Invoice Services
+export const invoiceService = {
+  generateInvoice: (bookingId) => api.post(`/invoices/generate/${bookingId}`),
+  getInvoicePDF: (invoiceId) => api.get(`/invoices/pdf/${invoiceId}`, { responseType: 'blob' }),
+  getUserInvoices: (params) => api.get('/invoices/my', { params }),
+  getCompanyInvoices: (params) => api.get('/invoices/company', { params }),
+  getAllInvoices: (params) => api.get('/invoices', { params }),
+};
+
+// QR Validation Services
+export const qrValidationService = {
+  scanTicket: (data) => api.post('/qr-validation/scan', data),
+  validateTicket: (ticketId) => api.get(`/qr-validation/validate/${ticketId}`),
+  getScans: (params) => api.get('/qr-validation/scans', { params }),
+};
+
 export default api;

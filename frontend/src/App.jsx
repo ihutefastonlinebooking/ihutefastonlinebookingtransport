@@ -12,14 +12,67 @@ function App() {
       <HelmetProvider>
         <Router>
           <Routes>
+            {/* Public Routes */}
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/book" element={<BookingPage />} />
-            <Route path="/driver/scan" element={<ProtectedRoute><DriverScanPage /></ProtectedRoute>} />
-            <Route path="/dashboard" element={<DashboardPage />} />
+            
+            {/* Client Routes */}
+            <Route 
+              path="/book" 
+              element={
+                <ProtectedRoute requiredRoles={['client']}>
+                  <BookingPage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/dashboard" 
+              element={
+                <ProtectedRoute requiredRoles={['client']}>
+                  <DashboardPage />
+                </ProtectedRoute>
+              } 
+            />
+            
+            {/* Driver Routes */}
+            <Route 
+              path="/driver/scan" 
+              element={
+                <ProtectedRoute requiredRoles={['driver']}>
+                  <DriverScanPage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/driver/dashboard" 
+              element={
+                <ProtectedRoute requiredRoles={['driver']}>
+                  <DashboardPage />
+                </ProtectedRoute>
+              } 
+            />
+            
+            {/* Admin Routes */}
             <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/admin/dashboard" element={<ProtectedRoute adminOnly><AdminDashboard /></ProtectedRoute>} />
+            <Route 
+              path="/admin/dashboard" 
+              element={
+                <ProtectedRoute requiredRoles={['super_admin', 'company_admin']}>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/company/dashboard" 
+              element={
+                <ProtectedRoute requiredRoles={['company_admin']}>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              } 
+            />
+            
+            {/* Catch all */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Router>

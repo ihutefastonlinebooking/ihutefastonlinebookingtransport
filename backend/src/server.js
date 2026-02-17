@@ -21,6 +21,7 @@ import adminRoutes from './routes/adminRoutes.js';
 import shortTripRoutes from './routes/shortTripRoutes.js';
 import ihuteCardRoutes from './routes/ihuteCardRoutes.js';
 import qrValidationRoutes from './routes/qrValidationRoutes.js';
+import invoiceRoutes from './routes/invoiceRoutes.js';
 
 // Initialize Express
 const app = express();
@@ -78,6 +79,7 @@ app.use('/api/v1/admin', adminRoutes);
 app.use('/api/v1/short-trips', shortTripRoutes);
 app.use('/api/v1/ihute-cards', ihuteCardRoutes);
 app.use('/api/v1/qr-validation', qrValidationRoutes);
+app.use('/api/v1/invoices', invoiceRoutes);
 
 // ==================== 404 HANDLER ====================
 app.use(notFoundHandler);
