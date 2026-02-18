@@ -8,8 +8,16 @@ import SMSService from '../services/SMSService.js';
 import EmailService from '../services/EmailService.js';
 
 const qrService = new QRCodeService();
-const smsService = new SMSService();
 const emailService = new EmailService();
+
+// Lazy initialization of SMS service
+let smsService = null;
+const getSmsService = () => {
+  if (!smsService) {
+    smsService = new SMSService();
+  }
+  return smsService;
+};
 
 export class BookingController {
   async searchRoutes(req, res, next) {

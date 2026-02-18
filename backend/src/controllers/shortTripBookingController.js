@@ -6,7 +6,14 @@ import { generateQRCode } from '../utils/crypto.js';
 import SMSService from '../services/SMSService.js';
 import EmailService from '../services/EmailService.js';
 
-const smsService = new SMSService();
+// Lazy initialization of SMS service
+let smsService = null;
+const getSmsService = () => {
+  if (!smsService) {
+    smsService = new SMSService();
+  }
+  return smsService;
+};
 const emailService = new EmailService();
 
 export class ShortTripBookingController {
@@ -112,7 +119,7 @@ export class ShortTripBookingController {
 
       // Send confirmation SMS
       if (phone) {
-        await smsService.sendConfirmation(phone, `Your booking ${bookingReference} is confirmed. Price: ${totalPrice}`);
+        await getSmsService().sendConfirmation(phone, `Your booking ${bookingReference} is confirmed. Price: ${totalPrice}`);
       }
 
       // Send confirmation email

@@ -3,11 +3,20 @@ import config from '../config/index.js';
 
 export class SMSService {
   constructor() {
+    if (!config.twilio.accountSid || !config.twilio.authToken || !config.twilio.phoneNumber) {
+      console.warn('Twilio credentials not configured. SMS service disabled.');
+      this.client = null;
+      return;
+    }
     this.client = twilio(config.twilio.accountSid, config.twilio.authToken);
     this.phoneNumber = config.twilio.phoneNumber;
   }
 
   async sendSMS(toPhone, message) {
+    if (!this.client) {
+      console.log('SMS not sent - Twilio not configured');
+      return { success: false, message: 'SMS service not configured' };
+    }
     try {
       const response = await this.client.messages.create({
         body: message,

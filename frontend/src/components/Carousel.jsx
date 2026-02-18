@@ -58,13 +58,18 @@ export default function Carousel({ className = '' }) {
         <div className="absolute inset-0 bg-black bg-opacity-25" />
       </div>
 
-      <div className="absolute bottom-6 left-6 text-white z-20">
-        <h2 className="text-3xl md:text-4xl font-bold">HuteFast — Book your trip</h2>
-        <p className="mt-2 max-w-xl">Reliable transport across Rwanda — safe, affordable, and on time.</p>
+      <div className="absolute bottom-6 left-6 text-white z-20 max-w-2xl">
+        <h1 className="text-4xl md:text-6xl font-bold mb-4">EHUT – Smart Transport Booking</h1>
+        <div className="space-y-2">
+          <p className="text-xl md:text-2xl font-semibold">Fast. Secure. Reliable.</p>
+          <p className="text-lg md:text-xl">Book Your Trip Anytime, Anywhere</p>
+          <p className="text-lg md:text-xl">Your Journey Starts With EHUT</p>
+          <p className="text-lg md:text-xl">First Booking Transport Platform Outside Rwanda</p>
+        </div>
       </div>
 
       <div className="absolute bottom-6 right-6 z-20">
-        <a href="/register" className="bg-white text-primary px-4 py-2 rounded shadow-lg">Book Now</a>
+        <a href="/register" className="bg-white text-primary px-6 py-3 rounded-lg shadow-lg font-bold hover:bg-gray-100 transition-colors">Book Now</a>
       </div>
     </div>
   );

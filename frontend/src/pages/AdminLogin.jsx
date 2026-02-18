@@ -1,58 +1,86 @@
 import React from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Button, Card, Input, Alert } from '../components';
+import { authService } from '../services/api';
 import { storeToken } from '../utils/auth';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 export default function AdminLogin() {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const { t } = useTranslation();
+  const [formData, setFormData] = React.useState({ email: '', password: '' });
+  const [error, setError] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const nav = useNavigate();
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!email || !password) return toast.error('Please provide email and password');
+    setError('');
     setLoading(true);
+
     try {
-      const res = await axios.post('/api/auth/login', { email, password });
-      const { tokens } = res.data.data;
-      if (!tokens || !tokens.accessToken) throw new Error('No token returned');
-      storeToken(tokens.accessToken);
-      toast.success('Login successful');
+      const response = await authService.login(formData);
+      storeToken(response.tokens.accessToken);
+      localStorage.setItem('user', JSON.stringify(response.user));
+      toast.success(t('auth.loginSuccess', 'Login successful'));
       nav('/admin/dashboard');
     } catch (err) {
-      console.error(err);
-      toast.error(err?.response?.data?.message || 'Login failed');
-    } finally { setLoading(false); }
+      setError(err?.message || t('auth.invalidCredentials', 'Login failed. Please try again.'));
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <ToastContainer />
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-4">Admin Login</h2>
-        <label className="block mb-2">Email</label>
-        <input
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          type="email"
-          className="w-full p-2 border rounded mb-4"
-          required
-        />
-        <label className="block mb-2">Password</label>
-        <input
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          type="password"
-          className="w-full p-2 border rounded mb-6"
-          required
-        />
-        <button type="submit" className="w-full bg-primary text-white py-2 rounded" disabled={loading}>
-          {loading ? 'Signing in...' : 'Sign In'}
-        </button>
-      </form>
+      <div className="w-full max-w-md">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-primary mb-2">{t('app.name', 'EHUT')}</h1>
+          <p className="text-gray-600">{t('auth.adminLoginTitle', 'Admin Portal')}</p>
+        </div>
+
+        <Card className="p-8">
+          <h2 className="text-2xl font-bold mb-6 text-gray-900">{t('auth.adminLoginTitle', 'Admin Login')}</h2>
+
+          {error && <Alert variant="error" message={error} className="mb-4" />}
+
+          <form onSubmit={handleSubmit}>
+            <Input
+              label={t('common.email', 'Email')}
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder={t('auth.emailPlaceholder', 'Enter admin email')}
+              required
+            />
+
+            <Input
+              label={t('common.password', 'Password')}
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder={t('auth.passwordPlaceholder', 'Enter admin password')}
+              required
+            />
+
+            <Button
+              type="submit"
+              variant="primary"
+              className="w-full mb-4"
+              disabled={loading}
+            >
+              {loading ? t('common.loading', 'Signing in...') : t('common.signIn', 'Sign In')}
+            </Button>
+          </form>
+        </Card>
+      </div>
     </div>
   );
 }

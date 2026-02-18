@@ -369,8 +369,9 @@ export const initializeDatabase = async () => {
     await query(schema);
     console.log('✓ Database schema initialized successfully');
   } catch (error) {
-    console.error('✗ Database initialization failed:', error);
-    throw error;
+    console.error('✗ Database initialization failed:', error.message);
+    console.log('⚠️ Continuing without database - some features may not work');
+    // Don't throw error to allow server to start
   }
 };
 

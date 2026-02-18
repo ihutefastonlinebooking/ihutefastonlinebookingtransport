@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "HuteFast",
+    "name": "EHUT",
     "slogan": "Smart Transport Booking Platform"
   },
   "common": {
@@ -25,10 +25,14 @@
     "loading": "Loading...",
     "error": "Error",
     "success": "Success",
-    "warning": "Warning"
+    "warning": "Warning",
+    "home": "Home",
+    "aboutUs": "About Us",
+    "contactUs": "Contact Us",
+    "dashboard": "Dashboard"
   },
   "auth": {
-    "loginTitle": "Sign In to HuteFast",
+    "loginTitle": "Sign In to EHUT",
     "registerTitle": "Create Your Account",
     "forgotPassword": "Forgot password?",
     "dontHaveAccount": "Don't have an account?",
@@ -38,8 +42,11 @@
     "companyAdmin": "Company Admin",
     "loginSuccess": "Login successful",
     "registerSuccess": "Registration successful",
-    "invalidCredentials": "Invalid email or password",
-    "passwordResetSent": "Password reset link sent to your email"
+    "invalidCredentials": "Login failed. Please check your credentials and try again.",
+    "passwordResetSent": "Password reset link sent to your email",
+    "emailPlaceholder": "Enter your email",
+    "passwordPlaceholder": "Enter your password",
+    "adminLoginTitle": "Admin Portal"
   },
   "booking": {
     "searchTrips": "Search Trips",
@@ -101,5 +108,44 @@
     "confirmDelete": "Are you sure you want to delete this?",
     "loadingData": "Loading data...",
     "noResults": "No results found"
+  },
+  "home": {
+    "whyChooseUs": "Why Choose EHUT?",
+    "reliableTrips": "Reliable Trips",
+    "reliableTripsDesc": "Safe, comfortable, and on-time transportation across Rwanda",
+    "affordablePrices": "Affordable Prices",
+    "affordablePricesDesc": "Competitive rates with transparent pricing and no hidden charges",
+    "easyBooking": "Easy Booking",
+    "easyBookingDesc": "Book in seconds with our mobile-friendly platform",
+    "aboutHutefast": "About EHUT",
+    "aboutDesc1": "EHUT is Rwanda's leading transport booking platform. We connect passengers with reliable transport operators across the country.",
+    "aboutDesc2": "With our innovative QR-based ticketing system and real-time tracking, we ensure safe, transparent, and convenient travel for everyone.",
+    "aboutDesc3": "Founded in 2024, EHUT is committed to modernizing transport in Rwanda with technology and customer service excellence.",
+    "servingRwanda": "Serving Rwanda",
+    "servingDesc": "Connecting all major cities and towns across the country",
+    "monthlyTrips": "Monthly Trips",
+    "transportPartners": "Transport Partners",
+    "safeVerified": "Safe Verified",
+    "contactUs": "Contact Us",
+    "email": "Email",
+    "phone": "Phone",
+    "location": "Location",
+    "sendMessage": "Send us a Message",
+    "fullName": "Full Name",
+    "yourName": "Your name",
+    "yourEmail": "your@email.com",
+    "yourMessage": "Your message",
+    "sendMessageBtn": "Send Message",
+    "readyToTravel": "Ready to Travel?",
+    "joinThousands": "Join thousands of satisfied customers using EHUT",
+    "aboutHutefastFooter": "About EHUT",
+    "leadingPlatform": "Leading transport booking platform in Rwanda",
+    "quickLinks": "Quick Links",
+    "support": "Support",
+    "faq": "FAQ",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "followUs": "Follow Us",
+    "copyright": "© 2026 EHUT. All rights reserved."
   }
 }

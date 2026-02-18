@@ -9,7 +9,14 @@ import EmailService from '../services/EmailService.js';
 import QRCodeService from '../services/QRCodeService.js';
 
 const momoService = new MoMoPaymentService();
-const smsService = new SMSService();
+// Lazy initialization of SMS service
+let smsService = null;
+const getSmsService = () => {
+  if (!smsService) {
+    smsService = new SMSService();
+  }
+  return smsService;
+};
 const emailService = new EmailService();
 const qrService = new QRCodeService();
 
@@ -153,7 +160,7 @@ export class PaymentController {
           
           // Send SMS confirmation
           try {
-            await smsService.sendPaymentConfirmation(user.phone, booking.total_price, booking.booking_reference);
+            await getSmsService().sendPaymentConfirmation(user.phone, booking.total_price, booking.booking_reference);
           } catch (error) {
             console.error('SMS error:', error);
           }
