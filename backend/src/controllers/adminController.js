@@ -14,8 +14,19 @@ export class AdminController {
       let query_text = 'SELECT * FROM companies';
       let params = [];
 
+      // Role-based filtering
+      if (req.user.role === 'company_admin') {
+        // Company admin can only see their own company
+        const companyResult = await query('SELECT id FROM companies WHERE admin_user_id = $1', [req.user.userId]);
+        if (companyResult.rows.length === 0) {
+          return res.json(apiResponse.paginated([], page, limit, 0));
+        }
+        query_text += ` WHERE id = $${params.length + 1}`;
+        params.push(companyResult.rows[0].id);
+      }
+
       if (status) {
-        query_text += ` WHERE status = $${params.length + 1}`;
+        query_text += params.length > 0 ? ` AND status = $${params.length + 1}` : ` WHERE status = $${params.length + 1}`;
         params.push(status);
       }
 
@@ -23,7 +34,7 @@ export class AdminController {
       params.push(limit, offset);
 
       const result = await query(query_text, params);
-      const countResult = await query('SELECT COUNT(*) FROM companies');
+      const countResult = await query('SELECT COUNT(*) FROM companies' + (req.user.role === 'company_admin' ? ' WHERE admin_user_id = $1' : ''), req.user.role === 'company_admin' ? [req.user.userId] : []);
 
       res.json(apiResponse.paginated(result.rows, page, limit, parseInt(countResult.rows[0].count)));
     } catch (error) {
@@ -87,8 +98,19 @@ export class AdminController {
                        JOIN companies c ON d.company_id = c.id`;
       let params = [];
 
+      // Role-based filtering
+      if (req.user.role === 'company_admin') {
+        // Company admin can only see drivers from their company
+        const companyResult = await query('SELECT id FROM companies WHERE admin_user_id = $1', [req.user.userId]);
+        if (companyResult.rows.length === 0) {
+          return res.json(apiResponse.paginated([], page, limit, 0));
+        }
+        query_text += ` WHERE d.company_id = $${params.length + 1}`;
+        params.push(companyResult.rows[0].id);
+      }
+
       if (status) {
-        query_text += ` WHERE d.status = $${params.length + 1}`;
+        query_text += params.length > 0 ? ` AND d.status = $${params.length + 1}` : ` WHERE d.status = $${params.length + 1}`;
         params.push(status);
       }
 
@@ -96,7 +118,8 @@ export class AdminController {
       params.push(limit, offset);
 
       const result = await query(query_text, params);
-      const countResult = await query('SELECT COUNT(*) FROM drivers');
+      const countQuery = 'SELECT COUNT(*) FROM drivers d' + (req.user.role === 'company_admin' ? ' JOIN companies c ON d.company_id = c.id WHERE c.admin_user_id = $1' : '');
+      const countResult = await query(countQuery, req.user.role === 'company_admin' ? [req.user.userId] : []);
 
       res.json(apiResponse.paginated(result.rows, page, limit, parseInt(countResult.rows[0].count)));
     } catch (error) {

@@ -1,14 +1,17 @@
 import { query } from '../db/connection.js';
+import { v4 as uuidv4 } from 'uuid';
 import { validate, paymentValidationSchemas } from '../utils/validation.js';
 import { apiResponse, errors } from '../utils/response.js';
 import { auditLog } from '../middleware/auditLog.js';
 import MoMoPaymentService from '../services/MoMoPaymentService.js';
 import SMSService from '../services/SMSService.js';
 import EmailService from '../services/EmailService.js';
+import QRCodeService from '../services/QRCodeService.js';
 
 const momoService = new MoMoPaymentService();
 const smsService = new SMSService();
 const emailService = new EmailService();
+const qrService = new QRCodeService();
 
 export class PaymentController {
   async initiatePayment(req, res, next) {
@@ -102,6 +105,42 @@ export class PaymentController {
         );
 
         const booking = bookingResult.rows[0];
+
+        // Generate invoice
+        const invoiceId = uuidv4();
+        const invoiceNumber = `INV-${Date.now()}`;
+
+        await query(
+          `INSERT INTO invoices (id, booking_id, invoice_number, user_id, total_amount, tax_amount, discount_amount, status, invoice_date)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, CURRENT_DATE)`,
+          [
+            invoiceId,
+            bookingId,
+            invoiceNumber,
+            booking.user_id,
+            booking.total_price,
+            Math.round(booking.total_price * 0.18), // 18% tax
+            Math.round((booking.total_price * (booking.discount_percentage || 0)) / 100),
+            'issued',
+          ]
+        );
+
+        // Generate QR ticket
+        const qrData = {
+          bookingId: booking.id,
+          userId: booking.user_id,
+          routeId: booking.route_id,
+          seats: booking.seats,
+          totalPrice: booking.total_price,
+          timestamp: new Date().toISOString(),
+        };
+
+        const qrCode = await qrService.generateQRCode(qrData);
+
+        await query(
+          'UPDATE bookings SET qr_code = $1 WHERE id = $2',
+          [qrCode, bookingId]
+        );
 
         // Get user details for notifications
         const userResult = await query(

@@ -16,10 +16,10 @@ export default function AdminLogin() {
     if (!email || !password) return toast.error('Please provide email and password');
     setLoading(true);
     try {
-      const res = await axios.post('/api/admin/login', { email, password });
-      const { token } = res.data;
-      if (!token) throw new Error('No token returned');
-      storeToken(token);
+      const res = await axios.post('/api/auth/login', { email, password });
+      const { tokens } = res.data.data;
+      if (!tokens || !tokens.accessToken) throw new Error('No token returned');
+      storeToken(tokens.accessToken);
       toast.success('Login successful');
       nav('/admin/dashboard');
     } catch (err) {

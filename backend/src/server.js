@@ -70,6 +70,7 @@ app.get('/health', (req, res) => {
 });
 
 // ==================== API ROUTES ====================
+// Main v1 routes
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/bookings', bookingRoutes);
@@ -80,6 +81,18 @@ app.use('/api/v1/short-trips', shortTripRoutes);
 app.use('/api/v1/ihute-cards', ihuteCardRoutes);
 app.use('/api/v1/qr-validation', qrValidationRoutes);
 app.use('/api/v1/invoices', invoiceRoutes);
+
+// Also expose at /api/* for backward compatibility
+app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/bookings', bookingRoutes);
+app.use('/api/payments', paymentRoutes);
+app.use('/api/drivers', driverRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/short-trips', shortTripRoutes);
+app.use('/api/ihute-cards', ihuteCardRoutes);
+app.use('/api/qr-validation', qrValidationRoutes);
+app.use('/api/invoices', invoiceRoutes);
 
 // ==================== 404 HANDLER ====================
 app.use(notFoundHandler);

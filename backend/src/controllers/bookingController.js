@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { validate, bookingValidationSchemas } from '../utils/validation.js';
 import { apiResponse, errors } from '../utils/response.js';
 import { auditLog } from '../middleware/auditLog.js';
-import { generateBookingQRCode } from '../utils/qr.js';
 import QRCodeService from '../services/QRCodeService.js';
 import SMSService from '../services/SMSService.js';
 import EmailService from '../services/EmailService.js';
