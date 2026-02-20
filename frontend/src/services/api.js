@@ -57,19 +57,11 @@ export const userService = {
 
 // Booking services
 export const bookingService = {
-  searchRoutes: (origin, destination) => api.get('/bookings/search', { params: { origin, destination } }),
-  checkAvailability: (routeId, departureDate, numberOfSeats) => 
-    api.get('/bookings/availability', { params: { routeId, departureDate, numberOfSeats } }),
+  searchRoutes: (data) => api.post('/bookings/search', data),
   createBooking: (data) => api.post('/bookings', data),
   getBooking: (id) => api.get(`/bookings/${id}`),
   getUserBookings: (params) => api.get('/bookings', { params }),
   cancelBooking: (id) => api.delete(`/bookings/${id}`),
-  // Admin methods
-  getAllBookings: (params) => api.get('/bookings/admin/all', { params }),
-  updateBookingStatus: (id, status) => api.put(`/bookings/${id}/status`, { status }),
-  updatePaymentStatus: (id, paymentStatus) => api.put(`/bookings/${id}/payment-status`, { paymentStatus }),
-  editBooking: (id, data) => api.put(`/bookings/${id}`, data),
-  deleteBooking: (id) => api.delete(`/bookings/${id}/admin`),
 };
 
 // Payment services

@@ -1,9 +1,9 @@
 import React from 'react';
+import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Spinner, Loader, Header, Button, Card } from '../components';
-import { bookingService } from '../services/api';
-import QRCode from 'qrcode';
+import { getToken } from '../utils/auth';
 
 const STEPS = [
   { id: 1, name: 'Service', icon: '🚌' },
@@ -51,14 +51,17 @@ export default function BookingFlow() {
     }
     setLoading(true);
     try {
-      const response = await bookingService.searchRoutes(searchOrigin, searchDest);
-      // response is already the data object due to axios interceptor
-      setRoutes(response.data || []);
-      if (!response.data || response.data.length === 0) {
+      const token = getToken();
+      const response = await axios.get('/api/v1/bookings/search', {
+        params: { origin: searchOrigin, destination: searchDest },
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setRoutes(response.data.data || []);
+      if (!response.data.data || response.data.data.length === 0) {
         toast.info('No routes found for this route');
       }
     } catch (err) {
-      toast.error(err.message || 'Failed to search routes');
+      toast.error(err.response?.data?.message || 'Failed to search routes');
     } finally {
       setLoading(false);
     }
@@ -131,18 +134,22 @@ export default function BookingFlow() {
   const handleConfirmBooking = async () => {
     setIsSubmitting(true);
     try {
-      const response = await bookingService.createBooking({
-        routeId: selectedRoute.id,
-        departureDate: selectedDate,
-        departureTime: selectedTime,
-        numberOfSeats: numberOfSeats,
-        passengerNames: passengerNames,
-        customerEmail: customerEmail,
-        customerPhone: customerPhone
-      });
+      const token = getToken();
+      const response = await axios.post(
+        '/api/v1/bookings',
+        {
+          routeId: selectedRoute.id,
+          departureDate: selectedDate,
+          departureTime: selectedTime,
+          numberOfSeats: numberOfSeats,
+          passengerNames: passengerNames,
+          customerEmail: customerEmail,
+          customerPhone: customerPhone
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
-      // response is already the data object due to axios interceptor
-      const booking = response.data;
+      const booking = response.data.data;
       setBookingRef(booking.bookingReference || booking.booking_ref);
       setBookingData(booking);
 
@@ -153,7 +160,7 @@ export default function BookingFlow() {
 
       toast.success('Booking confirmed successfully!');
     } catch (err) {
-      toast.error(err.message || 'Booking failed. Please try again.');
+      toast.error(err.response?.data?.message || 'Booking failed. Please try again.');
       console.error('Booking error:', err);
     } finally {
       setIsSubmitting(false);
