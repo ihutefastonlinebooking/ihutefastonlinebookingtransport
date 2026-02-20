@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { HelmetProvider } from 'react-helmet-async';
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
-import { HomePage, LoginPage, RegisterPage, DashboardPage, AdminLogin, BookingPage, DriverScanPage, AdminDashboard } from './pages';
+import { HomePage, LoginPage, RegisterPage, DashboardPage, AdminLogin, BookingPage, BookingFlow, BookingRequestPage, DriverScanPage, AdminDashboard } from './pages';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -16,6 +16,8 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/book-request" element={<BookingRequestPage />} />
+            <Route path="/book-flow" element={<BookingFlow />} />
             
             {/* Client Routes */}
             <Route 

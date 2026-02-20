@@ -156,6 +156,31 @@ CREATE INDEX IF NOT EXISTS idx_bookings_reference ON bookings(booking_reference)
 CREATE INDEX IF NOT EXISTS idx_bookings_departure_date ON bookings(departure_date);
 
 -- ============================================================================
+-- BOOKING_REQUESTS TABLE
+-- ============================================================================
+CREATE TABLE IF NOT EXISTS booking_requests (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  full_name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  phone VARCHAR(20) NOT NULL,
+  origin_city VARCHAR(100) NOT NULL,
+  destination_city VARCHAR(100) NOT NULL,
+  departure_date DATE NOT NULL,
+  return_date DATE,
+  number_of_passengers INT NOT NULL DEFAULT 1,
+  vehicle_type VARCHAR(50), -- 'bus', 'minibus', 'van', 'car'
+  special_requirements TEXT,
+  status VARCHAR(50) DEFAULT 'pending', -- 'pending', 'reviewed', 'contacted', 'confirmed', 'cancelled'
+  admin_notes TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_booking_requests_status ON booking_requests(status);
+CREATE INDEX IF NOT EXISTS idx_booking_requests_created_at ON booking_requests(created_at);
+CREATE INDEX IF NOT EXISTS idx_booking_requests_email ON booking_requests(email);
+
+-- ============================================================================
 -- PAYMENTS TABLE
 -- ============================================================================
 CREATE TABLE IF NOT EXISTS payments (

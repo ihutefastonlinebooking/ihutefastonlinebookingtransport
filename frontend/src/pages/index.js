@@ -4,6 +4,8 @@ export { default as RegisterPage } from './RegisterPage';
 export { default as DashboardPage } from './DashboardPage';
 export { default as AdminLogin } from './AdminLogin';
 export { default as BookingPage } from './BookingPage';
+export { default as BookingFlow } from './BookingFlow';
+export { default as BookingRequestPage } from './BookingRequestPage';
 export { default as DriverScanPage } from './DriverScanPage';
 export { default as AdminDashboard } from './AdminDashboard';
 export { default as NotFoundPage } from './NotFoundPage';

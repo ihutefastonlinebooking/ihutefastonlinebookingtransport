@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "EHUT",
+    "name": "IHUTE",
     "slogan": "Plateforme de réservation de transport intelligente"
   },
   "common": {
@@ -13,6 +13,7 @@
     "phone": "Téléphone",
     "firstName": "Prénom",
     "lastName": "Nom",
+    "fullName": "Nom complet",
     "accountType": "Type de compte",
     "submit": "Soumettre",
     "cancel": "Annuler",
@@ -29,7 +30,8 @@
     "home": "Accueil",
     "aboutUs": "À propos",
     "contactUs": "Contactez-nous",
-    "dashboard": "Tableau de bord"
+    "dashboard": "Tableau de bord",
+    "any": "N'importe lequel"
   },
   "auth": {
     "loginTitle": "Connectez-vous à EHUT",
@@ -62,7 +64,24 @@
     "bookingReference": "Référence de réservation",
     "departureTime": "Heure de départ",
     "arrivalTime": "Heure d'arrivée",
-    "seats": "Places"
+    "seats": "Sièges",
+    "bookYourTrip": "Réservez votre voyage",
+    "fillFormDesc": "Remplissez ce formulaire et notre équipe vous contactera avec les détails de réservation.",
+    "tripDetails": "Détails du voyage",
+    "requestSubmitted": "Demande soumise!",
+    "requestSubmittedDesc": "Votre demande de réservation a été soumise. Notre équipe vous contactera bientôt.",
+    "submitRequest": "Soumettre la demande de réservation",
+    "specialRequests": "Des demandes spéciales ou des notes...",
+    "departureDate": "Date de départ",
+    "returnDate": "Date de retour (Optionnel)",
+    "numberOfPassengers": "Nombre de passagers",
+    "vehicleType": "Type de véhicule préféré",
+    "specialRequirements": "Exigences spéciales (Optionnel)",
+    "specialRequirementsPlaceholder": "Toute demande spéciale ou note...",
+    "bus": "Bus",
+    "minibus": "Minibus",
+    "van": "Van",
+    "car": "Voiture"
   },
   "payment": {
     "selectPaymentMethod": "Sélectionnez le mode de paiement",

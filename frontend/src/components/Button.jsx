@@ -5,7 +5,9 @@ export const Button = ({
   variant = 'primary', 
   size = 'md', 
   disabled = false,
+  isLoading = false,
   className = '',
+  type = 'button',
   ...props 
 }) => {
   const baseStyles = 'font-semibold rounded-lg transition duration-200 ease-in-out';
@@ -25,11 +27,17 @@ export const Button = ({
 
   return (
     <button 
-      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
-      disabled={disabled}
+      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className} ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
+      disabled={disabled || isLoading}
+      type={type}
       {...props}
     >
-      {children}
+      {isLoading ? (
+        <span className="flex items-center gap-2">
+          <span className="animate-spin">⏳</span>
+          Loading...
+        </span>
+      ) : children}
     </button>
   );
 };

@@ -2,10 +2,17 @@ import React from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Spinner, Loader } from '../components';
+import { Spinner, Loader, Header } from '../components';
 import QRCode from 'qrcode';
 
 const PAYMENT_DEADLINE_MIN = 10;
+const STEPS = [
+  { id: 1, name: 'Select Service', icon: '🚌' },
+  { id: 2, name: 'Select Date', icon: '📅' },
+  { id: 3, name: 'Select Time', icon: '⏰' },
+  { id: 4, name: 'Your Details', icon: '👤' },
+  { id: 5, name: 'Confirm', icon: '✓' }
+];
 
 export default function BookingPage() {
   const [step, setStep] = React.useState(1); // 1: Search, 2: Select Seats, 3: Passenger Names, 4: Confirm, 5: Success

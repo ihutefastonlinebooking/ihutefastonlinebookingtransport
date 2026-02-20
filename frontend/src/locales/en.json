@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "EHUT",
+    "name": "IHUTE",
     "slogan": "Smart Transport Booking Platform"
   },
   "common": {
@@ -13,6 +13,7 @@
     "phone": "Phone",
     "firstName": "First Name",
     "lastName": "Last Name",
+    "fullName": "Full Name",
     "accountType": "Account Type",
     "submit": "Submit",
     "cancel": "Cancel",
@@ -29,7 +30,8 @@
     "home": "Home",
     "aboutUs": "About Us",
     "contactUs": "Contact Us",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "any": "Any"
   },
   "auth": {
     "loginTitle": "Sign In to EHUT",
@@ -62,7 +64,24 @@
     "bookingReference": "Booking Reference",
     "departureTime": "Departure Time",
     "arrivalTime": "Arrival Time",
-    "seats": "Seats"
+    "seats": "Seats",
+    "bookYourTrip": "Book Your Trip",
+    "fillFormDesc": "Fill out this form and our team will contact you with booking details.",
+    "tripDetails": "Trip Details",
+    "requestSubmitted": "Request Submitted!",
+    "requestSubmittedDesc": "Your booking request has been submitted. Our team will contact you soon.",
+    "submitRequest": "Submit Booking Request",
+    "specialRequests": "Any special requests or notes...",
+    "departureDate": "Departure Date",
+    "returnDate": "Return Date (Optional)",
+    "numberOfPassengers": "Number of Passengers",
+    "vehicleType": "Preferred Vehicle Type",
+    "specialRequirements": "Special Requirements (Optional)",
+    "specialRequirementsPlaceholder": "Any special requests or notes...",
+    "bus": "Bus",
+    "minibus": "Minibus",
+    "van": "Van",
+    "car": "Car"
   },
   "payment": {
     "selectPaymentMethod": "Select Payment Method",

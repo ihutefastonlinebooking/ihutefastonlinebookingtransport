@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "EHUT",
+    "name": "IHUTE",
     "slogan": "Urubuga rw'ibicuruzwa rwa transport"
   },
   "common": {
@@ -13,6 +13,7 @@
     "phone": "Telefoni",
     "firstName": "Izina ry'ibanze",
     "lastName": "Izina ry'umuryango",
+    "fullName": "Izina ryuzuye",
     "accountType": "Ubwoko bw'ikonti",
     "submit": "Ohereza",
     "cancel": "Hagarika",
@@ -29,7 +30,8 @@
     "home": "Ahabanza",
     "aboutUs": "Ibyacu",
     "contactUs": "Twandikire",
-    "dashboard": "Ikibaho"
+    "dashboard": "Ikibaho",
+    "any": "Icyo ari cyo cyose"
   },
   "auth": {
     "loginTitle": "Injira kuri EHUT",
@@ -62,7 +64,24 @@
     "bookingReference": "Indango y'ibyunganyije",
     "departureTime": "Igihe cyo gutangira",
     "arrivalTime": "Igihe cyo kugera",
-    "seats": "Imyanya"
+    "seats": "Imyanya",
+    "bookYourTrip": "Bunganya urugendo rwawe",
+    "fillFormDesc": "Uzuze iyi fomu kandi itsinda ryacu rizagusangana nawe hamwe n'ibisobanuro byo kubunganya.",
+    "tripDetails": "Ibisobanuro by'urugendo",
+    "requestSubmitted": "Icyifuzo cyatanzwe!",
+    "requestSubmittedDesc": "Icyifuzo cyawe cyo kubunganya cyatanzwe. Itsinda ryacu rizagusangana nawe vuba.",
+    "submitRequest": "Tanga icyifuzo cyo kubunganya",
+    "specialRequests": "Icyifuzo cyihariye cyangwa inyandiko...",
+    "departureDate": "Itariki yo gutangira",
+    "returnDate": "Itariki yo kugaruka (Bitari ngombwa)",
+    "numberOfPassengers": "Umubare w'abagenzi",
+    "vehicleType": "Ubwoko bw'imodoka wifuza",
+    "specialRequirements": "Ibyifuzo byihariye (Bitari ngombwa)",
+    "specialRequirementsPlaceholder": "Icyifuzo cyihariye cyangwa inyandiko...",
+    "bus": "Bisi",
+    "minibus": "Minibisi",
+    "van": "Vani",
+    "car": "Imodoka"
   },
   "payment": {
     "selectPaymentMethod": "Hitamo uburyo bwo kwishyura",

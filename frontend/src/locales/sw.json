@@ -13,6 +13,7 @@
     "phone": "Simu",
     "firstName": "Jina la kwanza",
     "lastName": "Jina la familia",
+    "fullName": "Jina kamili",
     "accountType": "Aina ya akaunti",
     "submit": "Wasilisha",
     "cancel": "Ghairi",
@@ -29,7 +30,8 @@
     "home": "Nyumbani",
     "aboutUs": "Kuhusu sisi",
     "contactUs": "Wasiliana nasi",
-    "dashboard": "Dashibodi"
+    "dashboard": "Dashibodi",
+    "any": "Yoyote"
   },
   "auth": {
     "loginTitle": "Ingia kwenye EHUT",
@@ -62,7 +64,24 @@
     "bookingReference": "Kumbukumbu ya uhifadhi",
     "departureTime": "Muda wa kuondoka",
     "arrivalTime": "Muda wa kufika",
-    "seats": "Viti"
+    "seats": "Viti",
+    "bookYourTrip": "Tafuta safari yako",
+    "fillFormDesc": "Jaza fomu hii na timu yetu itawasiliana nawe na maelezo ya uhifadhi.",
+    "tripDetails": "Maelezo ya safari",
+    "requestSubmitted": "Ombi limewasilishwa!",
+    "requestSubmittedDesc": "Ombi lako la uhifadhi limewasilishwa. Timu yetu itawasiliana nawe hivi karibuni.",
+    "submitRequest": "Wasilisha ombi la uhifadhi",
+    "specialRequests": "Maombi maalum au maelezo...",
+    "departureDate": "Tarehe ya kuondoka",
+    "returnDate": "Tarehe ya kurudi (Si lazima)",
+    "numberOfPassengers": "Idadi ya abiria",
+    "vehicleType": "Aina ya gari unayopendelea",
+    "specialRequirements": "Mahitaji maalum (Si lazima)",
+    "specialRequirementsPlaceholder": "Maombi maalum au maelezo...",
+    "bus": "Basi",
+    "minibus": "Minibasi",
+    "van": "Vani",
+    "car": "Gari"
   },
   "payment": {
     "selectPaymentMethod": "Chagua njia ya malipo",

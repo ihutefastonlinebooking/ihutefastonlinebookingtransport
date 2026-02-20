@@ -112,6 +112,25 @@ export const bookingValidationSchemas = {
   }),
 };
 
+// Booking Request Validation Schemas
+export const bookingRequestValidationSchemas = {
+  create: Joi.object({
+    fullName: Joi.string().required(),
+    email: Joi.string().email().required(),
+    phone: Joi.string().pattern(/^[\d+\-().\s]+$/).required(),
+    originCity: Joi.string().required(),
+    destinationCity: Joi.string().required(),
+    departureDate: Joi.date().required(),
+    returnDate: Joi.date().when('departureDate', {
+      is: Joi.exist(),
+      then: Joi.date().min(Joi.ref('departureDate')).allow(null),
+    }),
+    numberOfPassengers: Joi.number().integer().min(1).max(50).required(),
+    vehicleType: Joi.string().valid('bus', 'minibus', 'van', 'car').allow(null),
+    specialRequirements: Joi.string().max(1000).allow(null, ''),
+  }),
+};
+
 // Payment Validation Schemas
 export const paymentValidationSchemas = {
   createMoMoPayment: Joi.object({
