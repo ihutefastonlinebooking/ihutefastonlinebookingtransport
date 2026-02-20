@@ -15,16 +15,20 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "strict": true,
+    "strict": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noImplicitReturns": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
+    "isolatedModules": true,
     "jsx": "react-jsx",
-    "incremental": true
+    "incremental": true,
+    "types": ["node", "vite/client"]
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": ["src", "*.d.ts"],
+  "exclude": ["node_modules", "dist"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Card, Input, Alert } from '../components';
-import { apiService } from '../services/api';
+import { bookingService } from '../services/api';
 import { toast } from 'react-toastify';
 
 export const BookingRequestPage = () => {

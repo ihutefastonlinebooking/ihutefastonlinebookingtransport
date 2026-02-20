@@ -1,0 +1,25 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20.10.0"
+  NPM_VERSION = "10.2.3"
+
+[dev]
+  command = "npm run dev"
+  port = 5173
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[context.production]
+  environment = { VITE_API_URL = "https://api.yourdomain.com" }
+
+[context.deploy-preview]
+  environment = { VITE_API_URL = "https://api-staging.yourdomain.com" }
+
+[context.branch-deploy]
+  environment = { VITE_API_URL = "https://api-dev.yourdomain.com" }
