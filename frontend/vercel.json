@@ -4,10 +4,13 @@
   "outputDirectory": "dist",
   "framework": "react",
   "env": {
-    "VITE_API_URL": "@vite_api_url"
+    "VITE_API_URL": "https://ehut-api.railway.app/api",
+    "VITE_SOCKET_URL": "https://ehut-api.railway.app",
+    "VITE_APP_NAME": "EHUT"
   },
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
+  "envPrefix": "VITE_",
+  "public": true,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

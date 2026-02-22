@@ -2,8 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Button, Card, Input, Alert } from '../components';
-import { authService } from '../services/api';
-import { storeToken } from '../utils/auth';
+import { useAuthStore } from '../store/authStore';
 import { toast } from 'react-toastify';
 
 export default function AdminLogin() {
@@ -12,6 +11,7 @@ export default function AdminLogin() {
   const [error, setError] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const nav = useNavigate();
+  const login = useAuthStore(state => state.login);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,11 +24,9 @@ export default function AdminLogin() {
     setLoading(true);
 
     try {
-      const response = await authService.login(formData);
-      storeToken(response.tokens.accessToken);
-      localStorage.setItem('user', JSON.stringify(response.user));
+      await login(formData.email, formData.password);
       toast.success(t('auth.loginSuccess', 'Login successful'));
-      nav('/admin/dashboard');
+      nav('/admin/dashboard', { replace: true });
     } catch (err) {
       setError(err?.message || t('auth.invalidCredentials', 'Login failed. Please try again.'));
     } finally {

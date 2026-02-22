@@ -3,7 +3,7 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Loader, Spinner, Modal } from '../components';
-import { getToken, clearToken } from '../utils/auth';
+import { getAccessToken, clearTokens } from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
 
 const TABS = ['Routes', 'Vehicles', 'Drivers', 'Bookings', 'Payments', 'Reports', 'Settings'];
@@ -23,7 +23,7 @@ export default function AdminDashboard() {
     async function fetchData() {
       setLoading(true);
       try {
-        const token = getToken();
+        const token = getAccessToken();
         let endpoint = '/api/admin/';
         if (tab === 'Routes') endpoint += 'routes';
         else if (tab === 'Vehicles') endpoint += 'vehicles';
@@ -38,8 +38,8 @@ export default function AdminDashboard() {
         setData(res.data.data || []);
       } catch (err) {
         if (err?.response?.status === 401) {
-          clearToken();
-          nav('/admin/login');
+            clearTokens();
+            nav('/admin/login');
         } else {
           toast.error('Failed to fetch data');
         }
@@ -74,7 +74,7 @@ export default function AdminDashboard() {
 
   async function deleteItem(id) {
     try {
-      const token = getToken();
+      const token = getAccessToken();
       let endpoint = `/api/admin/`;
       if (tab === 'Routes') endpoint += `routes/${id}`;
       else if (tab === 'Vehicles') endpoint += `vehicles/${id}`;
@@ -91,8 +91,9 @@ export default function AdminDashboard() {
   }
 
   function handleLogout() {
-    clearToken();
-    nav('/admin/login');
+    clearTokens();
+    // prevent back navigation to protected pages
+    window.location.replace('/admin/login');
   }
 
   if (tab === 'Settings') {

@@ -7,6 +7,6 @@ export { default as BookingPage } from './BookingPage';
 export { default as BookingFlow } from './BookingFlow';
 export { default as BookingRequestPage } from './BookingRequestPage';
 export { default as DriverScanPage } from './DriverScanPage';
-export { default as AdminDashboard } from './AdminDashboard';
+export { default as AdminDashboard } from './AdminDashboardV2';
 export { default as NotFoundPage } from './NotFoundPage';
 export { default as ServerErrorPage } from './ServerErrorPage';

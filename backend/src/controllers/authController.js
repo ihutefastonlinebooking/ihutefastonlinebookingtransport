@@ -166,6 +166,27 @@ export class AuthController {
         throw errors.forbidden('User account is not active');
       }
 
+      // Verify refresh token exists and matches stored hash
+      const tokenRow = await query(
+        'SELECT token_hash, expires_at FROM refresh_tokens WHERE user_id = $1 ORDER BY created_at DESC LIMIT 1',
+        [user.id]
+      );
+
+      if (tokenRow.rows.length === 0) {
+        throw errors.unauthorized('Refresh token not found');
+      }
+
+      const { token_hash: tokenHash, expires_at: expiresAt } = tokenRow.rows[0];
+      if (!expiresAt || new Date() > expiresAt) {
+        throw errors.unauthorized('Refresh token expired');
+      }
+
+      const { comparePassword } = require('../utils/crypto.js');
+      const valid = await comparePassword(token, tokenHash);
+      if (!valid) {
+        throw errors.unauthorized('Invalid refresh token');
+      }
+
       // Generate new access token
       const accessToken = generateAccessToken(user.id, user.role);
 
@@ -180,7 +201,13 @@ export class AuthController {
 
   async logout(req, res, next) {
     try {
-      // Revoke refresh tokens (optional, can be implemented for better security)
+      // Revoke all refresh tokens for this user
+      try {
+        await query('DELETE FROM refresh_tokens WHERE user_id = $1', [req.user.userId]);
+      } catch (err) {
+        console.error('Failed to revoke refresh tokens during logout', err);
+      }
+
       await auditLog(req.user.userId, 'USER_LOGOUT', 'user', req.user.userId, null, null, 'success');
 
       res.json(apiResponse.success(null, 'Logout successful'));

@@ -1,17 +1,30 @@
 import jwtDecode from 'jwt-decode';
 
-const TOKEN_KEY = 'hute_admin_token';
+const ACCESS_KEY = 'accessToken';
+const REFRESH_KEY = 'refreshToken';
+const USER_KEY = 'user';
 
-export function storeToken(token) {
-  localStorage.setItem(TOKEN_KEY, token);
+export function storeTokens({ accessToken, refreshToken }) {
+  if (accessToken) localStorage.setItem(ACCESS_KEY, accessToken);
+  if (refreshToken) localStorage.setItem(REFRESH_KEY, refreshToken);
 }
 
-export function clearToken() {
-  localStorage.removeItem(TOKEN_KEY);
+export function storeAccessToken(token) {
+  localStorage.setItem(ACCESS_KEY, token);
 }
 
-export function getToken() {
-  return localStorage.getItem(TOKEN_KEY);
+export function getAccessToken() {
+  return localStorage.getItem(ACCESS_KEY);
+}
+
+export function getRefreshToken() {
+  return localStorage.getItem(REFRESH_KEY);
+}
+
+export function clearTokens() {
+  localStorage.removeItem(ACCESS_KEY);
+  localStorage.removeItem(REFRESH_KEY);
+  localStorage.removeItem(USER_KEY);
 }
 
 export function isTokenExpired(token) {
@@ -26,8 +39,8 @@ export function isTokenExpired(token) {
 }
 
 export function isAuthenticated() {
-  const t = getToken();
-  return !!t && !isTokenExpired(t);
+  const token = getAccessToken();
+  return !!token && !isTokenExpired(token);
 }
 
-export default { storeToken, getToken, clearToken, isAuthenticated };
+export default { storeTokens, getAccessToken, getRefreshToken, clearTokens, isAuthenticated };

@@ -7,4 +7,5 @@ export { Spinner, Loader } from './Loader';
 export { default as Modal } from './Modal';
 export { default as Carousel } from './Carousel';
 export { default as LiveMap } from './LiveMap';
+export { default as LanguageDropdown } from './LanguageDropdown';
 export { default as ProtectedRoute } from './ProtectedRoute';

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Spinner, Loader, Header, Button, Card } from '../components';
-import { getToken } from '../utils/auth';
+import { getAccessToken } from '../utils/auth';
 
 const STEPS = [
   { id: 1, name: 'Service', icon: '🚌' },
@@ -51,7 +51,7 @@ export default function BookingFlow() {
     }
     setLoading(true);
     try {
-      const token = getToken();
+      const token = getAccessToken();
       const response = await axios.get('/api/v1/bookings/search', {
         params: { origin: searchOrigin, destination: searchDest },
         headers: { Authorization: `Bearer ${token}` }
@@ -134,7 +134,7 @@ export default function BookingFlow() {
   const handleConfirmBooking = async () => {
     setIsSubmitting(true);
     try {
-      const token = getToken();
+      const token = getAccessToken();
       const response = await axios.post(
         '/api/v1/bookings',
         {

@@ -14,6 +14,7 @@ api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('accessToken');
     if (token) {
+      config.headers = config.headers || {};
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
@@ -21,16 +22,43 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Handle response errors
+// Response interceptor: attempt token refresh on 401 then retry original request
 api.interceptors.response.use(
-  (response) => response.data,
-  (error) => {
-    if (error.response?.status === 401) {
-      // Clear tokens and redirect to login
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+    const status = error.response?.status;
+
+    if (status === 401 && !originalRequest?._retry) {
+      originalRequest._retry = true;
+      const refreshToken = localStorage.getItem('refreshToken');
+
+      if (refreshToken) {
+        try {
+          // Use raw axios to avoid interceptor recursion
+          const refreshRes = await axios.post(`${API_URL}/auth/refresh`, { refreshToken });
+          const newAccess = refreshRes?.data?.data?.accessToken;
+          if (newAccess) {
+            localStorage.setItem('accessToken', newAccess);
+            originalRequest.headers = originalRequest.headers || {};
+            originalRequest.headers.Authorization = `Bearer ${newAccess}`;
+            return api(originalRequest);
+          }
+        } catch (refreshErr) {
+          // fall through to clearing session
+          console.error('Refresh token failed', refreshErr);
+        }
+      }
+
+      // If we reach here, refresh failed or no refresh token
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
-      window.location.href = '/login';
+      localStorage.removeItem('user');
+      // Replace location to prevent back-button returning to protected pages
+      window.location.replace('/admin/login');
+      return Promise.reject(error.response?.data || error.message);
     }
+
     return Promise.reject(error.response?.data || error.message);
   }
 );

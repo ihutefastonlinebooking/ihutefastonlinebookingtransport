@@ -16,10 +16,10 @@
   status = 200
 
 [context.production]
-  environment = { VITE_API_URL = "https://api.yourdomain.com" }
+  environment = { VITE_API_URL = "https://ehut-api.railway.app/api", VITE_SOCKET_URL = "https://ehut-api.railway.app", VITE_APP_NAME = "EHUT" }
 
 [context.deploy-preview]
-  environment = { VITE_API_URL = "https://api-staging.yourdomain.com" }
+  environment = { VITE_API_URL = "https://ehut-api.railway.app/api", VITE_SOCKET_URL = "https://ehut-api.railway.app", VITE_APP_NAME = "EHUT" }
 
 [context.branch-deploy]
-  environment = { VITE_API_URL = "https://api-dev.yourdomain.com" }
+  environment = { VITE_API_URL = "https://ehut-api.railway.app/api", VITE_SOCKET_URL = "https://ehut-api.railway.app", VITE_APP_NAME = "EHUT" }

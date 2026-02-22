@@ -4,9 +4,15 @@ import { HelmetProvider } from 'react-helmet-async';
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
 import { HomePage, LoginPage, RegisterPage, DashboardPage, AdminLogin, BookingPage, BookingFlow, BookingRequestPage, DriverScanPage, AdminDashboard } from './pages';
+import { useAuthStore } from './store/authStore';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
+  const initAuth = useAuthStore(state => state.initAuth);
+
+  React.useEffect(() => {
+    initAuth();
+  }, [initAuth]);
   return (
     <I18nextProvider i18n={i18n}>
       <HelmetProvider>

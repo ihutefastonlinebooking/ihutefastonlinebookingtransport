@@ -1,17 +1,18 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getToken, clearToken } from '../utils/auth';
+import { getAccessToken, clearTokens } from '../utils/auth';
 
 export default function Header() {
   const { t, i18n } = useTranslation();
   const nav = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
-  const token = getToken();
+  const token = getAccessToken();
 
   function handleLogout() {
-    clearToken();
-    nav('/');
+    clearTokens();
+    // replace history to avoid back navigation to authenticated pages
+    window.location.replace('/');
   }
 
   return (
